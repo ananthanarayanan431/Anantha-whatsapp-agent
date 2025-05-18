@@ -6,6 +6,11 @@ class Settings(BaseSettings):
 
     GROQ_API_KEY: str
     TOGETHER_API_KEY: str
+    
+    QDRANT_API_KEY: str | None
+    QDRANT_URL: str | None
+    QDRANT_PORT: str = "6333"
+    QDRANT_HOST: str | None = None
 
 
     TEXT_MODEL_NAME: str = "llama-3.3-70b-versatile"
