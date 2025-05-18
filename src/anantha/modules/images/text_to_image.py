@@ -126,4 +126,30 @@ class TextToImage:
     async def enhance_prompt(cls, prompt: str) -> EnhancedPrompt:
         """Enhances the given prompt using best practices in prompt engineering."""
 
-        pass 
+        try:
+            cls.logger.info(f"Enhancing prompt: {prompt}")
+
+            llm = ChatGroq(
+                model=settings.TEXT_MODEL_NAME,
+                api_key=settings.GROQ_API_KEY,
+                temperature=0.25,
+                max_retries=2
+            )
+
+            structured_llm = llm.with_structured_output(EnhancedPrompt)
+
+            chain = (
+                PromptTemplate(
+                    input_variables=["prompt"],
+                    template=IMAGE_ENHANCEMENT_PROMPT,
+                )
+                | structured_llm
+            )
+
+            enhanced_prompt = chain.invoke({"prompt": prompt}).content 
+            cls.logger.info(f"Enhanced prompt: {enhanced_prompt}")
+
+            return enhanced_prompt
+        
+        except Exception as e:
+            raise TextToImageError(f"Error enhancing prompt: {e}") from e

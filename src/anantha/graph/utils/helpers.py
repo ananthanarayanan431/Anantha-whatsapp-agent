@@ -7,6 +7,10 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_groq.chat_models import ChatGroq
 
 
+from anantha.modules.images.text_to_image import TextToImage
+from anantha.modules.images.image_to_text import ImageToText
+from anantha.modules.speech.text_to_speech import TextToSpeech
+
 def remover_asterisk_content(text: str)->str:
     """Remove content between asterisks in the text."""
 
@@ -39,10 +43,10 @@ def get_chat_model(temperature: float = 0.6) -> ChatGroq:
 
 
 def get_text_to_speech_module():
-    pass 
+    return TextToSpeech
 
 def get_text_to_image_module():
-    pass
+    return TextToImage
 
 def get_image_to_text_module():
-    pass
+    return ImageToText
