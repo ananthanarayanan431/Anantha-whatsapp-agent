@@ -134,7 +134,7 @@ class VectorStore:
         if not cls._collection_exists():
             return []
         
-        query_embedding = cls._modelencode(query)
+        query_embedding = cls._model.encode(query)
         results = cls._client.search(
             collection_name=cls.COLLECTION_NAME,
             query_vector=query_embedding.tolist(),

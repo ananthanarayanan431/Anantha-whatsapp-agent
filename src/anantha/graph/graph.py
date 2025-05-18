@@ -22,7 +22,7 @@ from anantha.graph.nodes import (
 from anantha.graph.state import AIAnanthaState
 
 @lru_cache(maxsize=1)
-def create_workflow_graph() -> StateGraph:
+def create_workflow_graph():
 
     builder = StateGraph(AIAnanthaState)
 

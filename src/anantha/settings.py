@@ -6,6 +6,8 @@ class Settings(BaseSettings):
 
     GROQ_API_KEY: str
     TOGETHER_API_KEY: str
+    ELEVENLABS_API_KEY: str
+    ELEVENLABS_VOICE_ID: str
     
     QDRANT_API_KEY: str | None
     QDRANT_URL: str | None
@@ -19,6 +21,9 @@ class Settings(BaseSettings):
     TTS_MODEL_NAME: str = "eleven_flash_v2_5"
     TTI_MODEL_NAME: str = "black-forest-labs/FLUX.1-schnell-Free"
     ITT_MODEL_NAME: str = "llama-3.2-90b-vision-preview"
+
+    OPENAI_EMBEDDING_MODEL: str = "text-embedding-3-small"
+    GEMINI_EMBEDDING_MODEL: str = "gemini-embedding-exp-03-07"
 
     MEMORY_TOP_K: int = 3
     ROUTER_MESSAGES_TO_ANALYZE: int = 3

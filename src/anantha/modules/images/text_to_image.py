@@ -64,7 +64,7 @@ class TextToImage:
 
             response = cls.together_client().images.generate(
                 prompt=prompt,
-                model=settings.ITT_MODEL_NAME,
+                model=settings.TTI_MODEL_NAME,
                 width=1024,
                 height=768,
                 steps=4,

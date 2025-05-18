@@ -44,7 +44,7 @@ async def on_message(message: cl.Message):
 
     async with cl.Step(type="run"):
         async with AsyncSqliteSaver.from_conn_string(settings.SHORT_TERM_MEMORY_DB_PATH) as short_term_memory:
-            graph = create_workflow_graph.compile(checkpointer=short_term_memory)
+            graph = create_workflow_graph().compile(checkpointer=short_term_memory)
             async for chunk in graph.astream(
                 {"messages": [HumanMessage(content=content)]},
                 {"configurable": {"thread_id": thread_id}},
@@ -74,7 +74,7 @@ async def on_message(message: cl.Message):
 
 
 @cl.on_audio_chunk
-async def on_audio_chunk(chunk: cl.AudioChunk):
+async def on_audio_chunk(chunk):
     """Handle incoming audio chunks"""
     if chunk.isStart:
         buffer = BytesIO()
@@ -98,7 +98,7 @@ async def on_audio_end(elements):
     thread_id = cl.user_session.get("thread_id")
 
     async with AsyncSqliteSaver.from_conn_string(settings.SHORT_TERM_MEMORY_DB_PATH) as short_term_memory:
-        graph = create_workflow_graph.compile(checkpointer=short_term_memory)
+        graph = create_workflow_graph().compile(checkpointer=short_term_memory)
         output_state = await graph.ainvoke(
             {"messages": [HumanMessage(content=transcription)]},
             {"configurable": {"thread_id": thread_id}},

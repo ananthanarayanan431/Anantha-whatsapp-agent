@@ -158,7 +158,7 @@ async def memory_extraction_node(state: AIAnanthaState) -> AIAnanthaState:
         return {}
     
     memory_manager = get_memory_manager()
-    await memory_manager.extract_and_store_memories(state["messages"][-1])
+    await memory_manager.extract_and_store_memory(state["messages"][-1])
     return {}
 
 def memory_injection_node(state: AIAnanthaState) -> AIAnanthaState:

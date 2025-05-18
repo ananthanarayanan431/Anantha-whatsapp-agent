@@ -32,8 +32,8 @@ class MemoryManager:
     async def _analyze_memory(cls, message: str) -> MemoryAnalysis:
         """Analyzes the given message and returns a MemoryAnalysis object."""
 
-        prompt = MEMORY_ANALYSIS_PROMPT.format(prompt=message)
-        return await cls.structured_llm.invoke({"prompt": prompt})
+        prompt = MEMORY_ANALYSIS_PROMPT.format(message=message)
+        return await cls.structured_llm.ainvoke(prompt)
     
     @classmethod
     async def extract_and_store_memory(cls, message: BaseMessage) -> None:
@@ -49,11 +49,11 @@ class MemoryManager:
             similar = cls.vector_store.find_similar_memory(analysis.formatted_message)
 
             if similar:
-                cls.logger(f"Similar memory already exists: '{analysis.formatted_memory}')")
+                cls.logger(f"Similar memory already exists: '{analysis.formatted_message}')")
             
-            cls.logger.info(f"Storing memory: '{analysis.formatted_memory}'")
+            cls.logger.info(f"Storing memory: '{analysis.formatted_message}'")
             cls.vector_store.store_memory(
-                text=analysis.formatted_memory,
+                text=analysis.formatted_message,
                 metadata={
                     'id': str(uuid.uuid4()),
                     'timestamp': datetime.now().isoformat(),
@@ -83,5 +83,5 @@ class MemoryManager:
 
 def get_memory_manager():
     """Get the MemoryManager"""
-    
+
     return MemoryManager
