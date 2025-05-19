@@ -33,7 +33,7 @@ RUN uv pip install -e .
 VOLUME ["/app/data"]
 
 # Expose the port
-EXPOSE 8080
+EXPOSE 8000
 
 # Run the FastAPI app using uvicorn
-CMD ["/app/.venv/bin/fastapi", "run", "anantha/interfaces/whatsapp/webhook_endpoint.py", "--port", "8080", "--host", "0.0.0.0"]
+CMD ["chainlit", "run", "anantha/interfaces/chainlit/app.py", "--port", "8000", "--host", "0.0.0.0"]
