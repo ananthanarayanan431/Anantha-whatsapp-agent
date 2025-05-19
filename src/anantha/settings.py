@@ -33,5 +33,4 @@ class Settings(BaseSettings):
 
     SHORT_TERM_MEMORY_DB_PATH: str = "/app/data/memory.db"
 
-
 settings = Settings()
