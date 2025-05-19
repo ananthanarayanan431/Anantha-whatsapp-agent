@@ -49,7 +49,7 @@ class MemoryManager:
             similar = cls.vector_store.find_similar_memory(analysis.formatted_message)
 
             if similar:
-                cls.logger(f"Similar memory already exists: '{analysis.formatted_message}')")
+                cls.logger.info(f"Similar memory already exists: '{analysis.formatted_message}')")
             
             cls.logger.info(f"Storing memory: '{analysis.formatted_message}'")
             cls.vector_store.store_memory(

@@ -20,7 +20,8 @@ class Settings(BaseSettings):
     STT_MODEL_NAME: str = "whisper-large-v3-turbo"
     TTS_MODEL_NAME: str = "eleven_flash_v2_5"
     TTI_MODEL_NAME: str = "black-forest-labs/FLUX.1-schnell-Free"
-    ITT_MODEL_NAME: str = "llama-3.2-90b-vision-preview"
+    ITT_MODEL_NAME: str = "meta-llama/llama-4-scout-17b-16e-instruct"
+    # "llama-3.2-90b-vision-preview"
 
     OPENAI_EMBEDDING_MODEL: str = "text-embedding-3-small"
     GEMINI_EMBEDDING_MODEL: str = "gemini-embedding-exp-03-07"

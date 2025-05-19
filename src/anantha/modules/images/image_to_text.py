@@ -13,7 +13,7 @@ class ImageToText:
 
 
     REQUIRED_ENV_VARS = ["GROQ_API_KEY"]
-    client: Optional[Groq] = None
+    _client: Optional[Groq] = None
     logger = logging.getLogger(__name__)
 
     @classmethod
@@ -29,10 +29,10 @@ class ImageToText:
     def client(cls) -> Groq:
         """Get or create Groq client instance using singleton pattern."""
 
-        if cls.client is None:
+        if cls._client is None:
             cls._validate_env_vars()
-            cls.client = Groq(api_key=settings.GROQ_API_KEY)
-        return cls.client
+            cls._client = Groq(api_key=settings.GROQ_API_KEY)
+        return cls._client
     
     @classmethod
     async def analyze_image(cls, image_data: Union[str, bytes], prompt:str ="") -> str:
@@ -82,7 +82,7 @@ class ImageToText:
             ]
 
             # API call!
-            response = cls.client.chat.completions.create(
+            response = cls.client().chat.completions.create(
                 model=settings.ITT_MODEL_NAME,
                 messages=messages,
                 max_tokens=2000,
